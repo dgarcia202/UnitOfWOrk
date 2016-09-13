@@ -21,6 +21,16 @@
         public IList<Provider> GetProviders()
         {
             return this.providers.ToList();
-        } 
+        }
+
+        public void AddProviders()
+        {
+            using (UnitOfWork.Start())
+            {
+                var person = new Provider { Name = "John Doe", PhoneNumber = "+34 633 732 716" };
+                UnitOfWork.CurrentSession.Save(person);
+                UnitOfWork.Current.TransactionalFlush();
+            }
+        }
     }
 }

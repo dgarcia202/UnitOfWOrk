@@ -1,6 +1,8 @@
 ﻿namespace Application.Infrastructure
 {
-    public interface IUnitOfWork
+    using System;
+
+    public interface IUnitOfWork : IDisposable
     {
         void Commit();
 
