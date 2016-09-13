@@ -11,7 +11,7 @@
     using NHibernate;
     using NHibernate.Linq;
 
-    public class Repository<T> : IRepository<T>
+    public class Repository<T> : IRepository<T> where T : class
     {
         private readonly ISession session;
 
