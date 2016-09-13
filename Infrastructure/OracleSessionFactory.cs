@@ -22,8 +22,7 @@
                     sessionFactory = Fluently.Configure()
                     .Database(OracleClientConfiguration.Oracle10
                     .ConnectionString("DATA SOURCE=XE;USER ID=PROVIDERS;PASSWORD=1234;")
-                    //.ConnectionString("Driver=(Oracle in XEClient);dbq=127.0.0.1:1521/XE;Uid=PROVIDERS;Pwd=1234;")
-                    .Driver<NHibernate.Driver.OracleManagedDataClientDriver>())
+                    .Driver<NHibernate.Driver.OracleClientDriver>())
                     .Mappings(m => m.FluentMappings.Add<ProviderMap>())
                     .ExposeConfiguration(config =>
                     {
