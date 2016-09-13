@@ -11,7 +11,7 @@
     using NHibernate;
     using NHibernate.Linq;
 
-    public class Repository<T> : IRepository<T>, IQueryable<T>
+    public class Repository<T> : IRepository<T>
     {
         private readonly ISession session;
 

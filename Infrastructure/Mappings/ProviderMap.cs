@@ -15,7 +15,7 @@
                 .Not.Nullable();
 
             this.Map(x => x.Name)
-                .Column("ADDRESS")
+                .Column("NAME")
                 .Length(255)
                 .Not.Nullable();
 

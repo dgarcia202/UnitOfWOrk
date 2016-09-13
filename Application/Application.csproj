@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="IOrderManagementService.cs" />
     <Compile Include="Infrastructure\IRepository.cs" />
     <Compile Include="OrderManagementService.cs" />
