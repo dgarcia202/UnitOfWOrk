@@ -42,9 +42,12 @@ namespace Api.App_Start
             // NOTE: To load from web.config uncomment the line below. Make sure to add a Microsoft.Practices.Unity.Configuration to the using statements.
             // container.LoadConfiguration();
 
-            container.RegisterType<IOrderManagementService, OrderManagementService>();
+            container.RegisterType<ISessionFactory, OracleSessionFactory>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IUnitOfWork, UnitOfWork>(new HierarchicalLifetimeManager());
 
             container.RegisterType<IRepository<Provider>, Repository<Provider>>();
+
+            container.RegisterType<IOrderManagementService, OrderManagementService>();
         }
     }
 }

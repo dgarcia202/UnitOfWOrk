@@ -7,6 +7,8 @@ using System.Web.Routing;
 
 namespace Api
 {
+    using log4net;
+
     public class WebApiApplication : System.Web.HttpApplication
     {
         protected void Application_Start()

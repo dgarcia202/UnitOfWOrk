@@ -7,5 +7,7 @@
     public interface IOrderManagementService
     {
         IList<Provider> GetProviders();
+
+        void AddProviders();
     }
 }

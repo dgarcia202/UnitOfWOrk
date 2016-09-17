@@ -13,27 +13,37 @@
 
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly ISession session;
+        private readonly UnitOfWork unitOfWork;
 
-        public Repository()
+        public Repository(IUnitOfWork unitOfWork)
         {
-            this.session = OracleSessionFactory.OpenSession();
+            if (unitOfWork == null)
+            {
+                throw new ArgumentNullException("unitOfWork");
+            }
+
+            this.unitOfWork = unitOfWork as UnitOfWork;
+
+            if (this.unitOfWork == null)
+            {
+                throw new InvalidOperationException("Repository received an incorrect implementation of UnitOfWork.");
+            }
         }
 
-        public Type ElementType => this.session.Query<T>().ElementType;
+        public Type ElementType => this.unitOfWork.Session.Query<T>().ElementType;
 
-        public Expression Expression => this.session.Query<T>().Expression;
+        public Expression Expression => this.unitOfWork.Session.Query<T>().Expression;
 
-        public IQueryProvider Provider => this.session.Query<T>().Provider;
+        public IQueryProvider Provider => this.unitOfWork.Session.Query<T>().Provider;
 
         public void Add(T entity)
         {
-            this.session.Save(entity);
+            this.unitOfWork.Session.Save(entity);
         }
 
         public T Get(Guid id)
         {
-            return this.session.Get<T>(id);
+            return this.unitOfWork.Session.Get<T>(id);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -43,12 +53,12 @@
 
         public IEnumerator<T> GetEnumerator()
         {
-            return this.session.Query<T>().GetEnumerator();
+            return this.unitOfWork.Session.Query<T>().GetEnumerator();
         }
 
         public void Remove(T entity)
         {
-            this.session.Delete(entity);
+            this.unitOfWork.Session.Delete(entity);
         }
     }
 }

@@ -8,18 +8,18 @@
     using NHibernate;
     using NHibernate.Tool.hbm2ddl;
 
-    public class OracleSessionFactory
+    public class OracleSessionFactory : ISessionFactory
     {
-        private static ISessionFactory sessionFactory;
+        private NHibernate.ISessionFactory sessionFactory;
 
-        private static ISessionFactory SessionFactory
+        private NHibernate.ISessionFactory SessionFactory
         {
             get
             {
                 // ReSharper disable once ConvertIfStatementToNullCoalescingExpression
-                if (sessionFactory == null)
+                if (this.sessionFactory == null)
                 {
-                    sessionFactory = Fluently.Configure()
+                    this.sessionFactory = Fluently.Configure()
                     .Database(OracleClientConfiguration.Oracle10
                     .ConnectionString("DATA SOURCE=XE;USER ID=PROVIDERS;PASSWORD=1234;")
                     .Driver<NHibernate.Driver.OracleClientDriver>())
@@ -31,13 +31,13 @@
                     .BuildSessionFactory();
                 }
 
-                return sessionFactory;
+                return this.sessionFactory;
             }
         }
 
-        public static ISession OpenSession()
+        public ISession OpenSession()
         {
-            return SessionFactory.OpenSession();
+            return this.SessionFactory.OpenSession();
         }
     }
 }

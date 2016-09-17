@@ -4,6 +4,8 @@
 
     using FluentNHibernate.Mapping;
 
+    using NHibernate.Type;
+
     public class ProviderMap : ClassMap<Provider>
     {
         public ProviderMap()
@@ -27,6 +29,11 @@
             this.Map(x => x.PhoneNumber)
                 .Column("PHONE")
                 .Length(1)
+                .Not.Nullable();
+
+            this.Map(x => x.Active)
+                .Column("ACTIVE")
+                .CustomType<YesNoType>()
                 .Not.Nullable();
         }
     }

@@ -9,9 +9,13 @@ namespace Api.Controllers
 {
     using Application;
 
+    using log4net;
+
     [RoutePrefix("api")]
     public class ProvidersController : ApiController
     {
+        private static ILog log = LogManager.GetLogger(typeof(ProvidersController));
+
         private readonly IOrderManagementService orderManagementService;
 
         public ProvidersController(IOrderManagementService orderManagementService)
@@ -23,6 +27,7 @@ namespace Api.Controllers
         [HttpGet]
         public IHttpActionResult GetProviders()
         {
+            log.Info("Query has been made...");
             try
             {
                 return this.Ok(this.orderManagementService.GetProviders());
@@ -31,6 +36,21 @@ namespace Api.Controllers
             {
                 return this.InternalServerError(e);
             }
-        } 
+        }
+
+        [Route("providers")]
+        [HttpPost]
+        public IHttpActionResult AddProviders()
+        {
+            try
+            {
+                this.orderManagementService.AddProviders();
+                return this.Ok();
+            }
+            catch (Exception e)
+            {
+                return this.InternalServerError(e);
+            }
+        }
     }
 }

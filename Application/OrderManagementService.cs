@@ -11,11 +11,14 @@
 
     public class OrderManagementService : IOrderManagementService
     {
+        private readonly IUnitOfWork unitOfWork;
+
         private readonly IRepository<Provider> providers;
 
-        public OrderManagementService(IRepository<Provider> providers)
+        public OrderManagementService(IUnitOfWork unitOfWork, IRepository<Provider> providers)
         {
             this.providers = providers;
+            this.unitOfWork = unitOfWork;
         }
 
         public IList<Provider> GetProviders()
@@ -25,12 +28,16 @@
 
         public void AddProviders()
         {
-            using (UnitOfWork.Start())
-            {
-                var person = new Provider { Name = "John Doe", PhoneNumber = "+34 633 732 716" };
-                UnitOfWork.CurrentSession.Save(person);
-                UnitOfWork.Current.TransactionalFlush();
-            }
+            var provider1 = new Provider { Name = "John Doe 777", PhoneNumber = "+34 633 732 716", Address = "C/ Enric Granados"};
+            this.providers.Add(provider1);
+
+            var provider2 = new Provider { Name = "John Doe 888", PhoneNumber = "+34 633 732 716", Address = "C/ Enric Granados", Active = true };
+            this.providers.Add(provider2);
+
+            var provider3 = new Provider { Name = "John Doe 999", PhoneNumber = "+34 633 732 716", Address = "C/ Enric Granados" };
+            this.providers.Add(provider3);
+
+            this.unitOfWork.Commit();
         }
     }
 }
