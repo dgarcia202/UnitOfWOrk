@@ -13,8 +13,7 @@
             this.Table("PROVIDER");
 
             this.Id(x => x.Id)
-                .GeneratedBy.Sequence("PROVIDER_SEQ")
-                .Not.Nullable();
+                .GeneratedBy.Guid();
 
             this.Map(x => x.Name)
                 .Column("NAME")

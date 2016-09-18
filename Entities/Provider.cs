@@ -1,8 +1,10 @@
 ﻿namespace Entities
 {
+    using System;
+
     public class Provider
     {
-        public virtual int Id { get; set; }
+        public virtual Guid Id { get; set; }
 
         public virtual string Name { get; set; }
 

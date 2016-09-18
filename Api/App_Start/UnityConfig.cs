@@ -47,7 +47,7 @@ namespace Api.App_Start
 
             container.RegisterType<IRepository<Provider>, Repository<Provider>>();
 
-            container.RegisterType<IOrderManagementService, OrderManagementService>();
+            container.RegisterType<IProviderManagementService, ProviderManagementService>();
         }
     }
 }
