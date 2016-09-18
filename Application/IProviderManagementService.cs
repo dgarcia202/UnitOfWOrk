@@ -4,7 +4,7 @@
 
     using Entities;
 
-    public interface IOrderManagementService
+    public interface IProviderManagementService
     {
         IList<Provider> GetProviders();
 

@@ -16,11 +16,11 @@ namespace Api.Controllers
     {
         private static ILog log = LogManager.GetLogger(typeof(ProvidersController));
 
-        private readonly IOrderManagementService orderManagementService;
+        private readonly IProviderManagementService providerManagementService;
 
-        public ProvidersController(IOrderManagementService orderManagementService)
+        public ProvidersController(IProviderManagementService providerManagementService)
         {
-            this.orderManagementService = orderManagementService;
+            this.providerManagementService = providerManagementService;
         }
 
         [Route("providers")]
@@ -30,7 +30,7 @@ namespace Api.Controllers
             log.Info("Query has been made...");
             try
             {
-                return this.Ok(this.orderManagementService.GetProviders());
+                return this.Ok(this.providerManagementService.GetProviders());
             }
             catch (Exception e)
             {
@@ -44,7 +44,7 @@ namespace Api.Controllers
         {
             try
             {
-                this.orderManagementService.AddProviders();
+                this.providerManagementService.AddProviders();
                 return this.Ok();
             }
             catch (Exception e)

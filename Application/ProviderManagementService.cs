@@ -9,13 +9,13 @@
 
     using Entities;
 
-    public class OrderManagementService : IOrderManagementService
+    public class ProviderManagementService : IProviderManagementService
     {
         private readonly IUnitOfWork unitOfWork;
 
         private readonly IRepository<Provider> providers;
 
-        public OrderManagementService(IUnitOfWork unitOfWork, IRepository<Provider> providers)
+        public ProviderManagementService(IUnitOfWork unitOfWork, IRepository<Provider> providers)
         {
             this.providers = providers;
             this.unitOfWork = unitOfWork;

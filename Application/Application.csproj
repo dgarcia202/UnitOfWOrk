@@ -60,9 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
-    <Compile Include="IOrderManagementService.cs" />
+    <Compile Include="IProviderManagementService.cs" />
     <Compile Include="Infrastructure\IRepository.cs" />
-    <Compile Include="OrderManagementService.cs" />
+    <Compile Include="ProviderManagementService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
